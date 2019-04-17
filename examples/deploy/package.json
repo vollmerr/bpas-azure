@@ -1,0 +1,12 @@
+{
+  "name": "examples-deploy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "bpa-azure deploy",
+    "deploy:prod": "bpa-azure deploy --prod"
+  },
+  "author": "",
+  "license": "ISC"
+}

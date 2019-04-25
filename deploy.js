@@ -3,6 +3,7 @@ const zlib = require('zlib');
 const path = require('path');
 const fs = require('fs');
 const util = require('util');
+const mime = require('mime-types');
 const {
   Aborter,
   BlockBlobURL,
@@ -58,7 +59,9 @@ const uploadFile = async (filePath, fileName) => {
     20,
     { progress: ev => console.log(ev) },
   );
-  await blockBlobURL.setHTTPHeaders(timer, { blobContentEncoding: compressType });
+  // set headers
+  const blobContentType = mime.lookup(fileName);
+  await blockBlobURL.setHTTPHeaders(timer, { blobContentEncoding: compressType, blobContentType });
 };
 
 // compress a file then upload it to Azure

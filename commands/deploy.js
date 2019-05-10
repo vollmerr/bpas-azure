@@ -99,4 +99,4 @@ const deploy = () => {
   }
 };
 
-deploy();
+module.exports = deploy;

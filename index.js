@@ -6,6 +6,9 @@ const yargs = require('yargs')
   .command('deploy', 'Compress and deploy file(s) to Azure Blob Storage')
   .example('$0 deploy --prod', 'Deploy to production')
   .alias('p', 'prod')
+  // remove hash
+  .command('remove-hash', 'Remove hash from file names and references in index.html')
+  .example('$0 remove-hash', 'Remove hash from all files and fix index.html')
   // help
   .help('h')
   .alias('h', 'help')
@@ -13,10 +16,16 @@ const yargs = require('yargs')
   .argv;
 
 const command = yargs._[0];
+const mode = yargs.prod ? 'prod' : 'dev';
 
+// configure environment variables based off MODE
+require('dotenv').config({ path: `.env.${mode}` });
+
+/* eslint-disable global-require */
 if (command === 'deploy') {
-  const mode = yargs.prod ? 'prod' : 'dev';
-  // configure environment variables based off MODE
-  require('dotenv').config({ path: `.env.${mode}` });
-  require('./deploy');
+  require('./commands/deploy')();
+}
+
+if (command === 'remove-hash') {
+  require('./commands/remove-hash')();
 }

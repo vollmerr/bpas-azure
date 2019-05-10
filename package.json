@@ -1,11 +1,12 @@
 {
   "name": "bpa-azure-test",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Utility functions for Azure",
   "main": "index.js",
   "scripts": {
     "start": "node ./index.js",
-    "deploy": "node ./index.js deploy"
+    "deploy": "node ./index.js deploy",
+    "remove-hash": "node ./index.js remove-hash"
   },
   "bin": {
     "bpa-azure": "index.js"
@@ -15,13 +16,13 @@
   "dependencies": {
     "@azure/storage-blob": "^10.3.0",
     "chalk": "^2.4.2",
-    "dotenv": "^7.0.0",
+    "dotenv": "^8.0.0",
     "mime-types": "^2.1.24",
     "yargs": "^13.2.2"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.1"
+    "eslint-plugin-import": "^2.17.2"
   }
 }

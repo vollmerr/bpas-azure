@@ -15,6 +15,8 @@ const {
 } = require('@azure/storage-blob');
 const chalk = require('chalk');
 
+const { log, error } = require('../utils/logger');
+
 const pipeline = util.promisify(stream.pipeline);
 
 const account = process.env.DEPLOY_ACCOUNT;
@@ -69,7 +71,7 @@ const deployFile = async (fileName) => {
   const filePath = path.join(targetPath, fileName);
   await compressFile(filePath);
   await uploadFile(filePath, fileName);
-  console.log(`successfully deployed ${chalk.magenta(fileName)}`);
+  log(`successfully deployed ${chalk.magenta(fileName)}`);
 };
 
 // deploys all files in a given directory to Azure, compressed
@@ -85,18 +87,21 @@ const deployFolder = async () => {
     const promises = fileNames.map(deployFile);
 
     await Promise.all(promises);
-    console.log(chalk.green('successfully deployed all files!'));
   } catch (err) {
-    console.error(err);
+    error(err);
   }
 };
 
 const deploy = () => {
+  log('starting to deploy files...');
+
   if (targetFile) {
     deployFile(targetFile);
   } else {
     deployFolder();
   }
+
+  log('successfully deployed all files!');
 };
 
 module.exports = deploy;

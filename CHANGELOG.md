@@ -1,5 +1,8 @@
 # bpa-azure - Change Log
 
+## v0.0.4 (2019-05-10)
+- improved logging
+  
 ## v0.0.3 (2019-05-10)
 - add `remove-hash` command and example
 - export commands as functions instead of running on require

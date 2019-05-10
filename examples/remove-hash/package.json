@@ -1,0 +1,14 @@
+{
+  "name": "examples-remove-hash",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "remove-hash": "bpa-azure remove-hash"
+  },
+  "devDependencies": {
+    "bpa-azure-test": "0.0.3"
+  },
+  "author": "",
+  "license": "ISC"
+}

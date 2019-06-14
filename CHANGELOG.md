@@ -4,6 +4,7 @@
 
 - update dependency versions
   - fix axios security issue
+- add license
 
 ## v0.0.4 (2019-05-10)
 

@@ -25,3 +25,5 @@ The following commands are available:
 
 - [deploy](./examples/deploy/)
   - Compress and deploy a file or files in a folder to Azure Blob Storage
+- [remove-hash](./examples/remove-hash/)
+  - Removes hash values from the filename of files in a folder

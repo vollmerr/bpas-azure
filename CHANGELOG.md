@@ -1,5 +1,12 @@
 # bpa-azure - Change Log
 
+## v0.0.6 (2019-08-30)
+
+- (chore) update dependency versions
+- (fix) example versions to use latest
+- (fix) linting issues / update to latest rules
+- (fix) license year and name
+
 ## v0.0.5 (2019-06-14)
 
 - update dependency versions

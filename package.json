@@ -1,28 +1,29 @@
 {
   "name": "bpa-azure",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Utility scripts for tasks in Azure",
   "main": "index.js",
   "scripts": {
     "start": "node ./index.js",
     "deploy": "node ./index.js deploy",
-    "remove-hash": "node ./index.js remove-hash"
+    "remove-hash": "node ./index.js remove-hash",
+    "lint": "eslint **/*.js"
   },
   "bin": {
     "bpa-azure": "index.js"
   },
   "author": "BPA",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "@azure/storage-blob": "^10.3.0",
+    "@azure/storage-blob": "^10.4.1",
     "chalk": "^2.4.2",
-    "dotenv": "^8.0.0",
+    "dotenv": "^8.1.0",
     "mime-types": "^2.1.24",
-    "yargs": "^13.2.4"
+    "yargs": "^14.0.0"
   },
   "devDependencies": {
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.3"
+    "eslint": "^6.3.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
   }
 }

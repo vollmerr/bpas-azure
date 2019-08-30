@@ -16,7 +16,7 @@ const removeHash = () => {
   log('starting to remove hashes...');
 
   fs.readdirSync(targetPath)
-    .filter(x => x.match(hashMatch))
+    .filter((x) => x.match(hashMatch))
     .forEach((file) => {
       const withHash = path.resolve(targetPath, file);
       const withoutHash = path.resolve(targetPath, file.replace(hashMatch, '$1$2'));

@@ -59,7 +59,7 @@ const uploadFile = async (filePath, fileName) => {
     blockBlobURL,
     4 * 1024 * 1024,
     20,
-    { progress: ev => console.log(ev) },
+    { progress: (ev) => console.log(ev) },
   );
   // set headers
   const blobContentType = mime.lookup(fileName);

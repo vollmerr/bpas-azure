@@ -7,7 +7,7 @@
     "remove-hash": "bpa-azure remove-hash"
   },
   "devDependencies": {
-    "bpa-azure-test": "*"
+    "bpa-azure": "*"
   },
   "author": "",
   "license": "MIT"

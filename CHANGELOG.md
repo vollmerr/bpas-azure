@@ -1,5 +1,12 @@
 # bpa-azure - Change Log
 
+## v0.1.0 (2019-10-31)
+
+- (chore) update dependency versions
+- (refactor) update to @azure/storage-blob@12, use new api
+- (fix) logging of success when fail
+- (fix) examples using old package name
+
 ## v0.0.6 (2019-08-30)
 
 - (chore) update dependency versions

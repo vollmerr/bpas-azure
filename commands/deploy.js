@@ -5,13 +5,9 @@ const fs = require('fs');
 const util = require('util');
 const mime = require('mime-types');
 const {
-  Aborter,
-  BlockBlobURL,
-  ContainerURL,
-  ServiceURL,
-  StorageURL,
-  SharedKeyCredential,
-  uploadStreamToBlockBlob,
+  BlobServiceClient,
+  StorageSharedKeyCredential,
+  newPipeline,
 } = require('@azure/storage-blob');
 const chalk = require('chalk');
 
@@ -26,10 +22,13 @@ const targetFolder = process.env.DEPLOY_FOLDER;
 const targetFile = process.env.DEPLOY_FILE;
 const compressType = process.env.DEPLOY_COMPRESSION_TYPE;
 
-const sharedKeyCredential = new SharedKeyCredential(account, accountKey);
-const storagePipeline = StorageURL.newPipeline(sharedKeyCredential);
-const serviceURL = new ServiceURL(`https://${account}.blob.core.windows.net`, storagePipeline);
-const containerURL = ContainerURL.fromServiceURL(serviceURL, containerName);
+const sharedKeyCredential = new StorageSharedKeyCredential(account, accountKey);
+const storagePipeline = newPipeline(sharedKeyCredential);
+const serviceClient = new BlobServiceClient(
+  `https://${account}.blob.core.windows.net`,
+  storagePipeline,
+);
+const containerClient = serviceClient.getContainerClient(containerName);
 const targetPath = path.resolve('.', targetFolder);
 
 // compress a file using the given compression type, keeping the original name
@@ -51,19 +50,26 @@ const compressFile = async (filePath) => {
 
 // upload a file to Azure, and set compression type header
 const uploadFile = async (filePath, fileName) => {
-  const timer = Aborter.timeout(30 * 60 * 1000);
-  const blockBlobURL = BlockBlobURL.fromContainerURL(containerURL, fileName);
-  await uploadStreamToBlockBlob(
-    timer,
-    fs.createReadStream(filePath),
-    blockBlobURL,
-    4 * 1024 * 1024,
-    20,
-    { progress: (ev) => console.log(ev) },
-  );
-  // set headers
+  const blockBlobClient = containerClient.getBlockBlobClient(fileName);
+
+  const fileStream = fs.createReadStream(filePath);
+  const bufferSize = 4 * 1024 * 1024;
+  const maxConcurrency = 10;
   const blobContentType = mime.lookup(fileName);
-  await blockBlobURL.setHTTPHeaders(timer, { blobContentEncoding: compressType, blobContentType });
+  const options = {
+    onProgress: log,
+    blobHTTPHeaders: {
+      blobContentEncoding: compressType,
+      blobContentType,
+    },
+  };
+
+  await blockBlobClient.uploadStream(
+    fileStream,
+    bufferSize,
+    maxConcurrency,
+    options,
+  );
 };
 
 // compress a file then upload it to Azure
@@ -87,21 +93,20 @@ const deployFolder = async () => {
     const promises = fileNames.map(deployFile);
 
     await Promise.all(promises);
+    log('successfully deployed all files!');
   } catch (err) {
     error(err);
   }
 };
 
-const deploy = () => {
+const deploy = async () => {
   log('starting to deploy files...');
 
   if (targetFile) {
-    deployFile(targetFile);
+    await deployFile(targetFile);
   } else {
-    deployFolder();
+    await deployFolder();
   }
-
-  log('successfully deployed all files!');
 };
 
 module.exports = deploy;

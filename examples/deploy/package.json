@@ -8,7 +8,7 @@
     "deploy:prod": "bpa-azure deploy --prod"
   },
   "devDependencies": {
-    "bpa-azure-test": "*"
+    "bpa-azure": "*"
   },
   "author": "",
   "license": "MIT"

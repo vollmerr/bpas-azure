@@ -1,4 +1,3 @@
-
 # bpa-azure
 
 This project contains scripts for tasks in Azure.

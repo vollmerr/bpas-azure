@@ -1,6 +1,6 @@
 {
   "name": "bpa-azure",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "Utility scripts for tasks in Azure",
   "main": "index.js",
   "scripts": {
@@ -15,14 +15,14 @@
   "author": "BPA",
   "license": "MIT",
   "dependencies": {
-    "@azure/storage-blob": "^10.4.1",
+    "@azure/storage-blob": "^12.0.0",
     "chalk": "^2.4.2",
-    "dotenv": "^8.1.0",
+    "dotenv": "^8.2.0",
     "mime-types": "^2.1.24",
-    "yargs": "^14.0.0"
+    "yargs": "^14.2.0"
   },
   "devDependencies": {
-    "eslint": "^6.3.0",
+    "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2"
   }

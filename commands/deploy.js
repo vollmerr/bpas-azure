@@ -11,16 +11,17 @@ const {
 } = require('@azure/storage-blob');
 const chalk = require('chalk');
 
-const { log, error } = require('../utils/logger');
+const { log, error } = require('../utils/logger')('deploy');
+const { getEnvVar, getRequiredEnvVar } = require('../utils/env-var');
 
 const pipeline = util.promisify(stream.pipeline);
 
-const account = process.env.DEPLOY_ACCOUNT;
-const accountKey = process.env.DEPLOY_ACCOUNT_KEY;
-const containerName = process.env.DEPLOY_CONTAINER;
-const targetFolder = process.env.DEPLOY_FOLDER;
-const targetFile = process.env.DEPLOY_FILE;
-const compressType = process.env.DEPLOY_COMPRESSION_TYPE;
+const account = getRequiredEnvVar('DEPLOY_ACCOUNT');
+const accountKey = getRequiredEnvVar('DEPLOY_ACCOUNT_KEY');
+const containerName = getRequiredEnvVar('DEPLOY_CONTAINER');
+const targetFolder = getRequiredEnvVar('DEPLOY_FOLDER');
+const targetFile = getEnvVar('DEPLOY_FILE');
+const compressType = getRequiredEnvVar('DEPLOY_COMPRESSION_TYPE');
 
 const sharedKeyCredential = new StorageSharedKeyCredential(account, accountKey);
 const storagePipeline = newPipeline(sharedKeyCredential);

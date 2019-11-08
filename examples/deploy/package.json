@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "deploy": "bpa-azure deploy",
-    "deploy:prod": "bpa-azure deploy --prod"
+    "deploy:development": "bpa-azure deploy",
+    "deploy:staging": "bpa-azure deploy --env=staging",
+    "deploy:production": "bpa-azure deploy --env=production"
   },
   "devDependencies": {
     "bpa-azure": "*"

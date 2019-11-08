@@ -1,19 +1,21 @@
 const chalk = require('chalk');
 
-const log = (...msg) => {
-  console.log(chalk.blueBright('bpa-azure: '), ...msg);
+const log = (name) => (...msg) => {
+  console.log(chalk.bgBlue(' bpa-azure '), chalk.blueBright(`[${name}]`), ...msg);
 };
 
-const warn = (...msg) => {
-  console.warn(chalk.yellowBright('bpa-azure: '), ...msg);
+const warn = (name) => (...msg) => {
+  console.warn(chalk.bgYellow(' bpa-azure '), chalk.yellowBright(`[${name}]`), ...msg);
 };
 
-const error = (...msg) => {
-  console.error(chalk.redBright('bpa-azure: '), ...msg);
+const error = (name) => (...msg) => {
+  console.error(chalk.bgRed(' bpa-azure '), chalk.redBright(`[${name}]`), ...msg);
 };
 
-module.exports = {
-  log,
-  warn,
-  error,
-};
+const logger = (name) => ({
+  log: log(name),
+  warn: warn(name),
+  error: error(name),
+});
+
+module.exports = logger;

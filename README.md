@@ -2,22 +2,23 @@
 
 This project contains scripts for tasks in Azure.
 
-## Getting Started
-To start using this project in your own:
+## Quick start
+This will show how to get the project running for production mode. Follow these same instructions for any other environments, replacing `production` with the environment name (such as development).
 
-1. Use `npm install --save bpa-azure` to install this project.
-2. Copy the `.env.sample` file to `.env.dev` and `.env.prod`.
-3. Make sure your `.gitignore` contains `.env.dev` and `.env.prod`. There will be sensitive data present that should not be commited to a repository.
-4. Fill out the variables in the `.env.dev` and `.env.prod` to match your deploy environments.
-5. Add scripts in the `package.json` for deploying in dev and prod, such as:
+1. Install the package using `npm install --save bpa-azure`
+2. Copy the `.env.sample` file to `.env.production`
+3. Fill out any publicly available environment variables (NO SECRETS SUCH AS API KEYS HERE!) in `.env.production`
+4. If there are any secrets being used, such as `DEPLOY_ACCOUNT_KEY`, copy the `.env.sample` file to `.env.production.local`
+5. Make sure your `.gitignore` contains `.env.production.local`. There will be sensitive data present that should not be commited to a repository.
+6. Fill out any private variables in `.env.production.local` (secrets such as API keys should go here)
+7. Add a script in the `package.json`, such as for deploying:
 
 ```
 "scripts": {
-  "deploy": "bpa-azure deploy",
-  "deploy:prod": "bpa-azure deploy --prod"
+  "deploy:prod": "bpa-azure deploy --env=production"
 }
 ```
-6. Running `npm run deploy` or `npm run deploy:prod` should now compress and deploy the file(s) targeted in `.env.dev` or `.env.prod`.
+6. Running `npm run deploy:prod` should now compress and deploy the file(s) targeted in `.env.production` or `.env.production.local`
 
 ## Commands
 The following commands are available:

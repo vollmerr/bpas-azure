@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "remove-hash": "bpa-azure remove-hash"
+    "remove-hash:development": "bpa-azure remove-hash",
+    "remove-hash:staging": "bpa-azure remove-hash --env=staging",
+    "remove-hash:production": "bpa-azure remove-hash --env=production"
   },
   "devDependencies": {
     "bpa-azure": "*"

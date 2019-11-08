@@ -1,5 +1,12 @@
 # bpa-azure - Change Log
 
+## v0.2.0 (2019-11-08)
+
+- (fix) license
+- (refactor) logging now namedspaced to files
+- (refactor) env var management - use create-react-app style env file loading
+- (docs) update examples and readme
+
 ## v0.1.0 (2019-10-31)
 
 - (chore) update dependency versions

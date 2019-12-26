@@ -1,3 +1,5 @@
+***THIS PROJECT HAS MOVED TO https://odibpas.visualstudio.com/CDT%20Website%20Integrations/_git/bpa-azure***
+
 # bpa-azure
 
 This project contains scripts for tasks in Azure.
